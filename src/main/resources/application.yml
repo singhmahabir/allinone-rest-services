@@ -1,0 +1,19 @@
+info:
+  name: '@project.artifactId@'
+  description: '@project.description@'
+  version: '@project.version@'
+
+defaultvalue: global
+---
+spring: 
+  profiles: default
+
+defaultvalue: default
+defaultvalue1: default1
+priority: filepriority
+listOfValues:  A , B , Cc
+input:
+  mapofvalues: 
+    a: a
+    b: b
+    c: c
