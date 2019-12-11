@@ -10,7 +10,7 @@ package z.interview;
  */
 public class Find2elementsInArrayWhoseProductIsP {
 
-    public static void main(String[] args) throws Exception {
-    }
+	public static void main(String[] args) throws Exception {
+	}
 
 }

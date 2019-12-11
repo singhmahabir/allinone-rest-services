@@ -1,0 +1,17 @@
+spring:
+  profiles: admin
+# If you are using Admin server and want to registered your application as Admin client then add below configuration. 
+
+  boot:
+    admin:
+      client:
+        url: http://localhost:1111
+#Required for this application to connect to SBA
+        username: admin
+        password: admin
+#configs to give secured server info to SBA while registering
+        instance:
+          metadata:
+            user:
+              name: ${spring.security.user.name}
+              password: ${spring.security.user.password}

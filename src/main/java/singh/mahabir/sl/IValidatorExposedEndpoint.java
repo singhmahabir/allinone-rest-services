@@ -23,22 +23,25 @@ import singh.mahabir.sl.model.ValidatorRequest;
  */
 public interface IValidatorExposedEndpoint {
 
-    // ****************************************************************************************************************
-    // ******************************************** Public Methods ****************************************************
-    // ****************************************************************************************************************
+	// ****************************************************************************************************************
+	// ******************************************** Public Methods
+	// ****************************************************
+	// ****************************************************************************************************************
 
-    @GetMapping(value = "validate", produces = MediaType.TEXT_PLAIN_VALUE)
-    ResponseEntity<String> validatedRequestParam(@NotEmpty String name, String name1);
+	@GetMapping(value = "validate", produces = MediaType.TEXT_PLAIN_VALUE)
+	ResponseEntity<String> validatedRequestParam(@NotEmpty String name, String name1);
 
-    @PostMapping(value = "validate/pojo", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    ResponseEntity<ValidatorRequest> validatePojo(@RequestBody ValidatorRequest request);
+	@PostMapping(value = "/validate/pojo", produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE }, consumes = { MediaType.APPLICATION_JSON_VALUE,
+					MediaType.APPLICATION_XML_VALUE })
+	ResponseEntity<ValidatorRequest> validatePojo(@RequestBody ValidatorRequest request);
 
-    @GetMapping(value = "email", produces = MediaType.TEXT_PLAIN_VALUE)
-    ResponseEntity<Boolean> validateEmail(@RequestParam String email);
+	@GetMapping(value = "email", produces = MediaType.TEXT_PLAIN_VALUE)
+	ResponseEntity<Boolean> validateEmail(@RequestParam String email);
 
-    // ****************************************************************************************************************
-    // ****************************************** Non Public Methods **************************************************
-    // ****************************************************************************************************************
+	// ****************************************************************************************************************
+	// ****************************************** Non Public Methods
+	// **************************************************
+	// ****************************************************************************************************************
 
 }

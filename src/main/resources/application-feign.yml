@@ -1,0 +1,7 @@
+spring:
+  profiles: feign
+
+# when using feign with hystrix
+feign:
+  hystrix:
+    enabled: true

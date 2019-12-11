@@ -1,17 +1,47 @@
+# if spring.profiles=name is not mention then that is global property
+# If you are not using eureka or spring.cloud then put spring.port in application.yml
+server:
+  port: 8082
+# we can set active profile from here as well no need to pass at run time
+spring:
+  profiles:
+#    active: default,h2,admin,actuator
+    active:
+      - default
+      - h2
+      - admin
+      - actuator
+  main:
+    banner-mode: "off"
+# info property details shows in actuators info url http://localhost:8082/actuator/info
 info:
   name: '@project.artifactId@'
   description: '@project.description@'
   version: '@project.version@'
+  id: ars
+  artifactId: '@project.artifactId@'
+  packaging: '@project.packaging@'
+  groupId: '@project.groupId@'
 
 defaultvalue: global
 ---
 spring: 
   profiles: default
+  #basic auth creddentials
+  security:    user:      name: client
+      password: client
+  
 
+#systemValue: systemValueFile
 defaultvalue: default
 defaultvalue1: default1
 priority: filepriority
-listOfValues:  A , B , Cc
+#We have two ways to pass the list to application
+#listOfValues:  A , B , Cc
+listOfValues:
+  A
+  B
+  C
 input:
   mapofvalues: 
     a: a

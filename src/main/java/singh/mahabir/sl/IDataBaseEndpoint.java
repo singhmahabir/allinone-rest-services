@@ -26,26 +26,31 @@ import singh.mahabir.sl.model.EmployeeRequest;
  */
 public interface IDataBaseEndpoint {
 
-    // ****************************************************************************************************************
-    // ******************************************** Public Methods ****************************************************
-    // ****************************************************************************************************************
+	// ****************************************************************************************************************
+	// ******************************************** Public Methods
+	// ****************************************************
+	// ****************************************************************************************************************
 
-    @GetMapping(value = "employee", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    ResponseEntity<List<EmployeeRequest>> getEmployeeByName(@RequestParam String name) throws MyException;
+	@GetMapping(value = "employee", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	ResponseEntity<List<EmployeeRequest>> getEmployeeByName(@RequestParam String name) throws MyException;
 
-    @GetMapping(value = "employee/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    ResponseEntity<EmployeeRequest> getEmployeeById(@PathVariable Integer id) throws MyException;
+	@GetMapping(value = "employee/{id}", produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	ResponseEntity<EmployeeRequest> getEmployeeById(@PathVariable Integer id) throws MyException;
 
-    @PostMapping(value = "employee", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    ResponseEntity<EmployeeRequest> saveEmployee(@RequestBody EmployeeRequest employee) throws MyException;
+	@PostMapping(value = "employee", produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE }, consumes = { MediaType.APPLICATION_JSON_VALUE,
+					MediaType.APPLICATION_XML_VALUE })
+	ResponseEntity<EmployeeRequest> saveEmployee(@RequestBody EmployeeRequest employee) throws MyException;
 
-    @PutMapping(value = "employee", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    ResponseEntity<EmployeeRequest> updateEmployee(@RequestBody EmployeeRequest employee) throws MyException;
+	@PutMapping(value = "employee", produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE }, consumes = { MediaType.APPLICATION_JSON_VALUE,
+					MediaType.APPLICATION_XML_VALUE })
+	ResponseEntity<EmployeeRequest> updateEmployee(@RequestBody EmployeeRequest employee) throws MyException;
 
-    // ****************************************************************************************************************
-    // ****************************************** Non Public Methods **************************************************
-    // ****************************************************************************************************************
+	// ****************************************************************************************************************
+	// ****************************************** Non Public Methods
+	// **************************************************
+	// ****************************************************************************************************************
 
 }
