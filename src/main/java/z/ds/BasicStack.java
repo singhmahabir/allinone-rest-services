@@ -9,8 +9,8 @@ import java.util.Stack;
 /**
  * <P>
  * It is a {@link Stack} Array Based implementation </>
- * 
- * 
+ *
+ *
  * @author Mahabir Singh
  *
  */
@@ -77,8 +77,18 @@ public class BasicStack<X> {
 		final BasicStack<String> stack = new BasicStack<>();
 		stack.push("Mahabir");
 		stack.push("Mahabir Singh");
+		stack.push("Mahabir Singh");
+		stack.push("Mahabir Singh");
+		stack.push("Mahabir Singh");
+		stack.push("Mahabir Singh");
+		stack.push("Mahabir Singh");
+		stack.push("Mahabir Singh");
+		stack.push("Mahabir Singh");
+		stack.push("Mahabir Singh");
 		System.err.println("size " + stack.size());
 		System.err.println(stack.pop());
+		stack.push("Mahabir Singh");
+		System.err.println("size " + stack.size());
 	}
 
 }

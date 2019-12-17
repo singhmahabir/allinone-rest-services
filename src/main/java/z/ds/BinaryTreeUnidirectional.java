@@ -8,10 +8,12 @@ package z.ds;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * One way BinarySearchTree mean only parent or node have the link to it's child
  * but child doesn't have reference to it's parent
- * 
+ *
  * <pre>
  * 		    binary search tree
  *		                    5
@@ -25,12 +27,13 @@ import java.util.Queue;
  *
  * @param <X> X is any data type
  */
-public class UnidirectionalBinaryTree<X extends Comparable<X>> {
+@Slf4j
+public class BinaryTreeUnidirectional<X extends Comparable<X>> {
 
 	private Node<X> root;
 	private int size;
 
-	public UnidirectionalBinaryTree() {
+	public BinaryTreeUnidirectional() {
 		root = null;
 	}
 
@@ -43,7 +46,7 @@ public class UnidirectionalBinaryTree<X extends Comparable<X>> {
 		// if this is the first item in the tree,set it as root
 		if (root == null) {
 			this.root = newNode;
-			System.out.println("set root: " + newNode.getData());
+			log.info("set root: " + newNode.getData());
 			this.size++;
 		}
 		// otherwise we need to insert the item into the tree using the binary
@@ -81,7 +84,7 @@ public class UnidirectionalBinaryTree<X extends Comparable<X>> {
 	 * This is also called level search
 	 * <p>
 	 * This is one of the Breadth-First-Search
-	 * 
+	 *
 	 */
 	public void printBredthFirstSearch() {
 		levelOrder(getRoot());
@@ -102,7 +105,7 @@ public class UnidirectionalBinaryTree<X extends Comparable<X>> {
 		}
 
 		deleted = unlink(this.root, item) != null;
-		;
+
 		if (deleted) {
 			this.size--;
 		}
@@ -132,7 +135,7 @@ public class UnidirectionalBinaryTree<X extends Comparable<X>> {
 			}
 			// case 3: 2 children
 			else {
-				Node<X> temp = findMin(currentNode.getRight());
+				final Node<X> temp = findMin(currentNode.getRight());
 				currentNode.setData(temp.getData());
 				currentNode.setRight(unlink(currentNode.getRight(), temp.getData()));
 //    			Node temp = findMax(currentNode.getLeft());  // two way either maximum in left or minimum in right
@@ -263,7 +266,7 @@ public class UnidirectionalBinaryTree<X extends Comparable<X>> {
 		}
 		postOrder(root.getLeft()); // Visit left subtree
 		postOrder(root.getRight()); // Visit right subtree
-		System.out.print(root.getData() + " "); // Print data
+		log.info(root.getData() + " "); // Print data
 	}
 
 	// Function to visit nodes in Preorder
@@ -273,7 +276,7 @@ public class UnidirectionalBinaryTree<X extends Comparable<X>> {
 		if (root == null) {
 			return;
 		}
-		System.out.print(root.getData() + " "); // Print data
+		log.info(root.getData() + " "); // Print data
 		preOrder(root.getLeft()); // Visit left subtree
 		preOrder(root.getRight()); // Visit right subtree
 	}
@@ -284,7 +287,7 @@ public class UnidirectionalBinaryTree<X extends Comparable<X>> {
 			return;
 		}
 		inOrder(root.getLeft()); // Visit left subtree
-		System.out.print(root.getData() + " "); // Print data
+		log.info(root.getData() + " "); // Print data
 		inOrder(root.getRight()); // Visit right subtree
 	}
 
@@ -293,12 +296,12 @@ public class UnidirectionalBinaryTree<X extends Comparable<X>> {
 		if (root == null) {
 			return;
 		}
-		Queue<Node<X>> Q = new LinkedList<>();
+		final Queue<Node<X>> Q = new LinkedList<>();
 		Q.add(root);
 		// while there is at least one discovered node
 		while (!Q.isEmpty()) {
-			Node<X> current = Q.poll(); // removing the element at front
-			System.out.print(current.getData() + " "); // Print data
+			final Node<X> current = Q.poll(); // removing the element at front
+			log.info(current.getData() + " "); // Print data
 			if (current.getLeft() != null) {
 				Q.add(current.getLeft());
 			}
@@ -306,5 +309,22 @@ public class UnidirectionalBinaryTree<X extends Comparable<X>> {
 				Q.add(current.getRight());
 			}
 		}
+	}
+
+	public static void main(String[] args) {
+		final BinaryTreeUnidirectional<Integer> tree = new BinaryTreeUnidirectional<>();
+		tree.add(9);
+		tree.add(4);
+		tree.add(12);
+		tree.add(3);
+		tree.add(11);
+		System.out.println(tree.getRoot().getData());
+		tree.delete(9);
+
+		System.out.println();
+		tree.printBredthFirstSearch();
+		System.out.println();
+		System.out.println(tree.getRoot().getData());
+
 	}
 }

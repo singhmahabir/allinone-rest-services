@@ -43,7 +43,7 @@ public class Sorting {
 	 *    |2|7|4|1|5|3|  given array
 	 *    |1|7|4|2|5|3|  1st iteration outer iteration
 	 *    |1|2|4|7|5|3|  2nd iteration outer iteration
-	 * 
+	 *
 	 * </pre>
 	 * <p>
 	 *
@@ -182,20 +182,20 @@ public class Sorting {
 	}
 
 	/**
-	 * 
+	 *
 	 * Like {@link #quickSort}, Merge Sort is a Divide and Conquer algorithm. It
 	 * divides input array in two halves, calls itself for the two halves and then
 	 * merges the two sorted halves.
 	 * <p>
 	 * Below are the properties of {@link #mergeSort}
-	 * 
+	 *
 	 * <ul style="list-style-type:circle;">
 	 * <li>Divide and Conquer
 	 * <li>Recursive
 	 * <li>Stable
 	 * <li>Not in place
 	 * </ul>
-	 * 
+	 *
 	 * Best case O(n) worst case O(nlogn)
 	 *
 	 * @param a array of int to be sort
@@ -208,8 +208,8 @@ public class Sorting {
 		}
 		final int mid = n / 2; // 2,7,4,1,5,3
 
-		int[] l = Arrays.copyOf(a, mid); // // 2,7,4 we can use like there in place of for loop
-		int[] r = Arrays.copyOfRange(a, mid, n); // 1,5,3
+		final int[] l = Arrays.copyOf(a, mid); // // 2,7,4 we can use like there in place of for loop
+		final int[] r = Arrays.copyOfRange(a, mid, n); // 1,5,3
 
 		mergeSort(l);
 		mergeSort(r);
@@ -290,16 +290,16 @@ public class Sorting {
 	 * <li>Not stable
 	 * <li>In place
 	 * </ul>
-	 * 
+	 *
 	 * <p>
-	 * 
+	 *
 	 * <pre>
 	 * Time Complexity <strong> O(nlogn) </strong> in average and best case
 	 * 		  <strong> O(n'2) </strong> worst case
 	 * but it can be avoided by using pivot randomly so it is <strong> O(nlogn) </strong>
 	 * with very high probability
 	 * </pre>
-	 * 
+	 *
 	 * @param a array of int to be sort
 	 * @return int[] sorted array
 	 */
@@ -332,26 +332,26 @@ public class Sorting {
 	}
 
 	private static int partition(int[] a, int start, int end) {
-		int pivot = a[end]; // tacking last index as pivot always
-		int pIndex = start;
+		final int pivotValue = a[end]; // tacking last index as pivot always
+		int pivot = start;
 		for (int i = start; i < end; i++) {
-			if (a[i] < pivot) {
-				int temp = a[i];
-				a[i] = a[pIndex];
-				a[pIndex] = temp;
-				pIndex++;
+			if (a[i] < pivotValue) {
+				final int temp = a[i];
+				a[i] = a[pivot];
+				a[pivot] = temp;
+				pivot++;
 			}
 		}
-		a[end] = a[pIndex];
-		a[pIndex] = pivot;
-		return pIndex;
+		a[end] = a[pivot];
+		a[pivot] = pivotValue;
+		return pivot;
 	}
 
 	public static void main(String[] args) {
-		final int[] o = Sorting.selectionSortReturn(new int[] { 2, 7, 4, 1, 5, 3 });
-		System.err.println();
-		int[] a = { 2, 7, 4, 1, 5, 3 };
-		bubbleSort(a);
-		Arrays.stream(quickSortRerurn(new int[] { 2, 7, 4, 1, 5, 3 })).forEach(System.out::print);
+//		Sorting.selectionSortReturn(new int[] { 2, 7, 4, 1, 5, 3 });
+//		System.err.println();
+//		final int[] a = { 2, 7, 4, 1, 5, 3 };
+//		insertionSort(a);
+		Arrays.stream(insertionSortReturn(new int[] { 2, 7, 4, 1, 5, 3 })).forEach(System.out::print);
 	}
 }

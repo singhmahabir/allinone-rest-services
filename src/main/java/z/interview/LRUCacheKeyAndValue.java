@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * @author Mahabir Singh
  *
  */
-public class LRUCache {
+public class LRUCacheKeyAndValue {
 
 	// store keys of cache
 	private final Deque<Integer> dq;
@@ -25,14 +25,14 @@ public class LRUCache {
 	/**
 	 *
 	 */
-	public LRUCache() {
+	public LRUCacheKeyAndValue() {
 		this(4);
 	}
 
 	/**
 	 * @param defaultCapacity
 	 */
-	public LRUCache(int defaultCapacity) {
+	public LRUCacheKeyAndValue(int defaultCapacity) {
 		csize = defaultCapacity;
 		dq = new LinkedList<>();
 		map = new HashSet<>();
@@ -67,7 +67,7 @@ public class LRUCache {
 	}
 
 	public static void main(String[] args) {
-		final LRUCache ob = new LRUCache();
+		final LRUCacheKeyAndValue ob = new LRUCacheKeyAndValue();
 		ob.set(5);
 
 		ob.set(4);

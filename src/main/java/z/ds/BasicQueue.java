@@ -4,13 +4,12 @@
 
 package z.ds;
 
-import java.util.LinkedList;
 import java.util.Queue;
 
 /**
  * <P>
  * It is a {@link Queue} implementation based on Array </>
- * 
+ *
  * @author Mahabir Singh
  *
  */
@@ -107,9 +106,18 @@ public class BasicQueue<X> {
 		final BasicQueue<String> stack = new BasicQueue<>();
 		stack.enQueue("Mahabir");
 		stack.enQueue("Mahabir Singh");
+		stack.enQueue("Mahabir Singh");
+		stack.enQueue("Mahabir Singh");
+		stack.enQueue("Mahabir Singh");
+		stack.enQueue("Mahabir Singh");
+		stack.enQueue("Mahabir Singh");
+		stack.enQueue("Mahabir Singh");
+		stack.enQueue("Mahabir Singh");
+		stack.enQueue("Mahabir Singh");
 		System.err.println("size " + stack.size());
 		System.err.println(stack.deQueue());
 		System.err.println("size " + stack.size());
+		stack.enQueue("Mahabir Singh");
 	}
 
 }

@@ -5,12 +5,11 @@
 package z.ds;
 
 import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * <P>
  * It is a {@link LinkedList} implementation </>
- * 
+ *
  * @author Mahabir Singh
  *
  */
@@ -176,15 +175,6 @@ public class BasicDoublyLinedkList<X> {
 	private class Node {
 		private Node nextNode;
 		private Node preNode;
-
-		public Node getPreNode() {
-			return preNode;
-		}
-
-		public void setPreNode(Node preNode) {
-			this.preNode = preNode;
-		}
-
 		private final X nodeItem;
 
 		public Node(X item) {

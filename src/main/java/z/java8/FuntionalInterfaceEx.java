@@ -14,11 +14,11 @@ import lombok.ToString;
 public class FuntionalInterfaceEx {
 
 	public static void main(String[] args) {
-		Runnable job = () -> System.out.println("thread running");
-		Thread thread = new Thread(job);
+		final Runnable job = () -> System.out.println("thread running");
+		final Thread thread = new Thread(job);
 		thread.start();
-		Set<Person> set = new HashSet<>();
-		Person person = new Person(1, "name");
+		final Set<Person> set = new HashSet<>();
+		final Person person = new Person(1, "name");
 		set.add(person);
 		set.add(person);
 		set.add(person);
@@ -42,11 +42,11 @@ class Person {
 
 	@Override
 	public boolean equals(Object o) {
-		return false;
+		return true;
 	}
 
 	@Override
 	public int hashCode() {
-		return 10;
+		return number;
 	}
 }

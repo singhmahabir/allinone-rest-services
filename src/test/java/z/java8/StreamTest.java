@@ -21,11 +21,11 @@ public class StreamTest {
 	@Test
 	public void testStreamIntermediary() {
 
-		Stream<String> stream = Stream.of("one", "two", "three", "four");
+		final Stream<String> stream = Stream.of("one", "two", "three", "four");
 		System.out.println(stream);
-		Predicate<String> p1 = Predicate.isEqual("two");
-		Predicate<String> p2 = Predicate.isEqual("three");
-		List<String> list = new ArrayList<>();
+		final Predicate<String> p1 = Predicate.isEqual("two");
+		final Predicate<String> p2 = Predicate.isEqual("three");
+		final List<String> list = new ArrayList<>();
 
 		stream.peek(System.out::println).filter(p1.or(p2)).peek(list::add);
 
@@ -35,10 +35,10 @@ public class StreamTest {
 	@Test
 	public void testStreamNotIntermediary() {
 
-		Stream<String> stream = Stream.of("one", "two", "three", "four");
-		Predicate<String> p1 = Predicate.isEqual("two");
-		Predicate<String> p2 = Predicate.isEqual("three");
-		List<String> list = new ArrayList<>();
+		final Stream<String> stream = Stream.of("one", "two", "three", "four");
+		final Predicate<String> p1 = Predicate.isEqual("two");
+		final Predicate<String> p2 = Predicate.isEqual("three");
+		final List<String> list = new ArrayList<>();
 
 		stream.peek(System.out::println).filter(p1.or(p2)).forEach(list::add);
 

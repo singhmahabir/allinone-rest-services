@@ -4,13 +4,9 @@
 
 package z.interview;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * @author Mahabir Singh
@@ -27,36 +23,22 @@ public class FirstNonRepeatingCharInString {
 	 * iteration, first element from List is our first non repeated character from
 	 * String.
 	 */
-	public static Character firstNonRepeatingChar(String word) {
-		final Set<Character> repeatingSet = new HashSet<>();
-		final List<Character> nonRepeatingList = new ArrayList<>();
-		for (int i = 0; i < word.length(); i++) {
-			final Character letter = word.charAt(i);
-			if (repeatingSet.contains(letter)) {
-				continue;
-			}
-			if (nonRepeatingList.contains(letter)) {
-				nonRepeatingList.remove(letter);
-				repeatingSet.add(letter);
-			} else {
-				nonRepeatingList.add(letter);
-			}
-		}
-		if (nonRepeatingList.isEmpty()) {
-			return null;
-		} else {
-			return nonRepeatingList.get(0);
-		}
-	}
 
 	public static Character firstNonRepeatingCharUsingMap(String word) {
 		final Map<Character, Integer> entry = new HashMap<>();
-		for (int i = 0; i < word.length(); i++) {
-			final Character letter = word.charAt(i);
-			if (entry.containsKey(letter)) {
-				entry.put(letter, entry.get(letter) + 1);
+//		for (int i = 0; i < word.length(); i++) {
+//			final Character letter = word.charAt(i);
+//			if (entry.containsKey(letter)) {
+//				entry.put(letter, entry.get(letter) + 1);
+//			} else {
+//				entry.put(letter, 1);
+//			}
+//		}
+		for (final char c : word.toCharArray()) {
+			if (entry.containsKey(c)) {
+				entry.put(c, entry.get(c) + 1);
 			} else {
-				entry.put(letter, 1);
+				entry.put(c, 1);
 			}
 		}
 		final Optional<Character> findFirst = entry.keySet()
@@ -73,7 +55,7 @@ public class FirstNonRepeatingCharInString {
 	}
 
 	public static void main(String[] args) {
-		final Character c = firstNonRepeatingCharUsingMap("adbcabca");
+		final Character c = firstNonRepeatingCharUsingMap("adbcabcade");
 		System.out.println("Repeting charater in String is " + c);
 
 	}

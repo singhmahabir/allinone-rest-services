@@ -5,8 +5,12 @@
 
 package z.ds;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 
@@ -14,7 +18,7 @@ import lombok.Setter;
  * 
  *         <pre>
  * 		    binary search tree
- *		                    5
+ *		            5
  *				   / \
  *				  2   8
  *				 / \   \
@@ -23,12 +27,13 @@ import lombok.Setter;
  *
  * @param <X> X is any data type
  */
-public class BasicBinaryTree<X extends Comparable<X>> {
+@Slf4j
+public class BinaryTree<X extends Comparable<X>> {
 
 	private Node root;
 	private int size;
 
-	public BasicBinaryTree() {
+	public BinaryTree() {
 		this.root = null;
 	}
 
@@ -37,7 +42,7 @@ public class BasicBinaryTree<X extends Comparable<X>> {
 		// if this is the first item in the tree,set it as root
 		if (root == null) {
 			this.root = newNode;
-			System.out.println("set root: " + newNode.getItem());
+			log.info("set root: " + newNode.getItem());
 			this.size++;
 		}
 		// otherwise we need to insert the item into the tree using the binary
@@ -54,16 +59,39 @@ public class BasicBinaryTree<X extends Comparable<X>> {
 		return getNode(item) != null;
 	}
 
+	/**
+	 * In Order traversal will provide in sorted list of binary tree
+	 * <p>
+	 * This is one of the Depth-First-Search
+	 */
 	public void printInOrder() {
 		inOrder(this.root);
 	}
 
+	/**
+	 * <p>
+	 * This is one of the Depth-First-Search
+	 */
 	public void printPostOrder() {
 		postOrder(this.root);
 	}
 
+	/**
+	 * <p>
+	 * This is one of the Depth-First-Search
+	 */
 	public void printPreOrder() {
 		preOrder(this.root);
+	}
+
+	/**
+	 * This is also called level search
+	 * <p>
+	 * This is one of the Breadth-First-Search
+	 *
+	 */
+	public void printBredthFirstSearch() {
+		levelOrder(this.root);
 	}
 
 	public boolean delete(X item) {
@@ -71,63 +99,67 @@ public class BasicBinaryTree<X extends Comparable<X>> {
 		if (this.root == null) {
 			return deleted;
 		}
-		// find a node to delete
-		final Node currentNode = getNode(item);
-		if (currentNode != null) {
-			// if the node to delete doesn't have any children, just delete it
-			if ((currentNode.getLeft() == null) && (currentNode.getRight() == null)) {
-				unlink(currentNode, null);
-				deleted = true;
-			}
-			// if the node to delete only has a any right children, remove it in the
-			// hierarchy
-			else if ((currentNode.getLeft() == null) && (currentNode.getRight() != null)) {
-				unlink(currentNode, currentNode.getRight());
-				deleted = true;
-			}
-			// if the node to delete only has a any left children, remove it in the
-			// hierarchy
-			else if ((currentNode.getLeft() != null) && (currentNode.getRight() == null)) {
-				unlink(currentNode, currentNode.getLeft());
-				deleted = true;
-			}
-			// if the node has both children, do a node swap to delete
-			else {
-				// you can swap out the node with the right most leaf mode on the left side
-				Node child = currentNode.getLeft();
-				while ((child.getRight() != null) && (child.getLeft() != null)) {
-					child = child.getRight();
-				}
-				// we have the right most leaf node. we can replace the current node with this
-				// node
-				child.getParent().setRight(null); // remove the leaf node form it's current position
 
-				child.setLeft(currentNode.getLeft());
-				child.setRight(currentNode.getRight());
+		deleted = unlink(this.root, item) != null;
 
-				unlink(currentNode, child);
-				deleted = true;
-			}
-		}
 		if (deleted) {
 			this.size--;
 		}
 		return deleted;
-
 	}
 
-	private void unlink(Node currentNode, Node newNode) {
+	private Node unlink(Node currentNode, X item) {
 		// if this is the root node, we replace that a little differently
-		if (currentNode == this.root) {
-			newNode.setLeft(currentNode.getLeft());
-			newNode.setRight(currentNode.getRight());
-			this.root = newNode;
-		} else if (currentNode.getParent().getRight() == currentNode) {
-			currentNode.getParent().setRight(newNode);
-		} else {
-			currentNode.getParent().setLeft(currentNode);
+		if (currentNode == null) {
+			return currentNode;
+		} else if (item.compareTo(currentNode.getItem()) < 0) {
+			currentNode.setLeft(unlink(currentNode.getLeft(), item));
+		} else if (item.compareTo(currentNode.getItem()) > 0) {
+			currentNode.setRight(unlink(currentNode.getRight(), item));
 		}
+		// Wohoo... I found you, Get ready to be deleted
+		else {
+			// Case 1: No child
+			if (currentNode.getLeft() == null && currentNode.getRight() == null) {
+				currentNode = null;
+			}
+			// Case 2: One child
+			else if (currentNode.getLeft() == null) {
+				currentNode = currentNode.getRight();
+			} else if (currentNode.getRight() == null) {
+				currentNode = currentNode.getLeft();
+			}
+			// case 3: 2 children
+			else {
+				final Node temp = findMin(currentNode.getRight());
+				currentNode.setItem(temp.getItem());
+				currentNode.setRight(unlink(currentNode.getRight(), temp.getItem()));
+//    			Node temp = findMax(currentNode.getLeft());  // two way either maximum in left or minimum in right
+//    			currentNode.setItem(temp.getItem());
+//    			currentNode.setLeft(unlink(currentNode.getLeft(), temp.getItem()));
+			}
+		}
+		return currentNode;
 	}
+
+	// Function to find minimum in a tree.
+	public Node findMin(Node root) {
+		while (root.getLeft() != null) {
+			root = root.getLeft();
+		}
+		return root;
+	}
+
+	// Function to find minimum in a tree.
+	public Node findMax(Node root) {
+		while (root.getRight() != null) {
+			root = root.getRight();
+		}
+		return root;
+	}
+
+
+	 
 
 	private Node getNode(X item) {
 		Node currentNode = this.root;
@@ -145,7 +177,7 @@ public class BasicBinaryTree<X extends Comparable<X>> {
 			// otherwise we go to the right side
 			else {
 				currentNode = currentNode.getRight();
-			}
+			} 
 		}
 		return null;
 	}
@@ -186,7 +218,7 @@ public class BasicBinaryTree<X extends Comparable<X>> {
 		}
 		postOrder(root.getLeft()); // Visit left subtree
 		postOrder(root.getRight()); // Visit right subtree
-		System.out.print(root.getItem() + " "); // Print data
+		log.info(root.getItem() + " "); // Print data
 	}
 
 	// Function to visit nodes in Preorder
@@ -196,7 +228,7 @@ public class BasicBinaryTree<X extends Comparable<X>> {
 		if (root == null) {
 			return;
 		}
-		System.out.print(root.getItem() + " "); // Print data
+		log.info(root.getItem() + " "); // Print data
 		preOrder(root.getLeft()); // Visit left subtree
 		preOrder(root.getRight()); // Visit right subtree
 	}
@@ -207,8 +239,28 @@ public class BasicBinaryTree<X extends Comparable<X>> {
 			return;
 		}
 		inOrder(root.getLeft()); // Visit left subtree
-		System.out.print(root.getItem() + " "); // Print data
+		log.info(root.getItem() + " "); // Print data
 		inOrder(root.getRight()); // Visit right subtree
+	}
+
+	// Function to print Nodes in a binary tree in Level order
+	public void levelOrder(Node root) {
+		if (root == null) {
+			return;
+		}
+		final Queue<Node> Q = new LinkedList<>();
+		Q.add(root);
+		// while there is at least one discovered node
+		while (!Q.isEmpty()) {
+			final Node current = Q.poll(); // removing the element at front
+			log.info(current.getItem() + " "); // Print data
+			if (current.getLeft() != null) {
+				Q.add(current.getLeft());
+			}
+			if (current.getRight() != null) {
+				Q.add(current.getRight());
+			}
+		}
 	}
 
 	/**
@@ -226,5 +278,22 @@ public class BasicBinaryTree<X extends Comparable<X>> {
 		public Node(X item) {
 			this.item = item;
 		}
+	}
+	
+	public static void main(String[] args) {
+		final BinaryTree<Integer> tree = new BinaryTree<>();
+		tree.add(9);
+		tree.add(4);
+		tree.add(12);
+		tree.add(3);
+		tree.add(11);
+		System.out.println(tree.root.getItem());
+		tree.delete(9);
+
+		System.out.println();
+		tree.printBredthFirstSearch();
+		System.out.println();
+		System.out.println(tree.root.getItem());
+
 	}
 }
