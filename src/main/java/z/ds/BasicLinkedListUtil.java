@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import lombok.Getter;
 import lombok.Setter;
 
-public class LinkedListUtil {
+public class BasicLinkedListUtil {
 
 	public static <E extends Comparable<E>> Node<E> reverseUsingStack(Node<E> head) {
 		final Deque<Node<E>> stack = new LinkedList<>();
@@ -49,7 +49,6 @@ public class LinkedListUtil {
 				return h;
 			}
 			s.add(h);
-
 			h = h.next;
 		}
 		return null;

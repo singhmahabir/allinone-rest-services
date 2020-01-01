@@ -287,8 +287,8 @@ public class Sorting {
 	 * <ul style="list-style-type:circle;">
 	 * <li>Divide and Conquer
 	 * <li>Recursive
-	 * <li>Not stable
-	 * <li>In place
+	 * <li>Not stable :- means same elements positions might not be same
+	 * <li>In place :- means no extra memory is required 
 	 * </ul>
 	 *
 	 * <p>

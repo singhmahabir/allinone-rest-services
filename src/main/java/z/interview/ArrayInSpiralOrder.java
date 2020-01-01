@@ -28,50 +28,49 @@ public class ArrayInSpiralOrder {
 	 * @param ar array to print in spiral order
 	 */
 	private static void spiralOrder(int[][] ar, int row, int column) {
-		int t, b, l, r;
-		t = 0;
-		b = row - 1;
-		l = 0;
-		r = column - 1;
+		int top = 0;
+		int bottom = row - 1;
+		int left = 0;
+		int right = column - 1;
 //	dir 0 mean right 1 mean down 2 mean left and 3 mean up so initially dir is 0
 		int dir = 0;
 
-		while (t <= b && l <= r) {
+		while (top <= bottom && left <= right) {
 
 			switch (dir) {
 			// dir 0 mean left to right L to R
 			case 0: {
-				for (int i = l; i <= r; i++) {
-					System.out.print(ar[t][i] + " ");
+				for (int i = left; i <= right; i++) {
+					System.out.print(ar[top][i] + " ");
 				}
-				t++;
+				top++;
 				dir = 1;
 				break;
 			}
 			// dir 1 mean top to down T to B
 			case 1: {
-				for (int i = t; i <= b; i++) {
-					System.out.print(ar[i][r] + " ");
+				for (int i = top; i <= bottom; i++) {
+					System.out.print(ar[i][right] + " ");
 				}
-				r--;
+				right--;
 				dir = 2;
 				break;
 			}
 			// dir 2 mean left to right R to L
 			case 2: {
-				for (int i = r; i >= l; i--) {
-					System.out.print(ar[b][i] + " ");
+				for (int i = right; i >= left; i--) {
+					System.out.print(ar[bottom][i] + " ");
 				}
-				b--;
+				bottom--;
 				dir = 3;
 				break;
 			}
 			// dir 3 mean down to up B to T
 			case 3: {
-				for (int i = b; i >= t; i--) {
-					System.out.print(ar[i][l] + " ");
+				for (int i = bottom; i >= top; i--) {
+					System.out.print(ar[i][left] + " ");
 				}
-				l++;
+				left++;
 				dir = 0;
 				break;
 			}

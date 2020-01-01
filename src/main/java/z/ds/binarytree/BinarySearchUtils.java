@@ -2,21 +2,21 @@
  * Copyright 2019. All rights reserved.
  */
 
-package z.ds;
+package z.ds.binarytree;
 
 /**
- * 
+ *
  * <pre>
  * 		    binary search tree
- *		                    5
+ *		            5
  *				   / \
  *				  2   8
  *				 / \   \
  *				1   4   9
  * </pre>
- * 
+ *
  * Time Complexity O(logn)
- * 
+ *
  * @author Mahabir Singh
  *
  */
@@ -71,11 +71,11 @@ public class BinarySearchUtils {
 	}
 
 	public static int countOccurrence(int[] a, int key) {
-		int first = occurrenceOfBinarySearch(a, key, true);
+		final int first = occurrenceOfBinarySearch(a, key, true);
 		if (first == -1) {
 			return first + 1;
 		}
-		int last = occurrenceOfBinarySearch(a, key, false);
+		final int last = occurrenceOfBinarySearch(a, key, false);
 		return last - first + 1;
 	}
 
@@ -89,7 +89,7 @@ public class BinarySearchUtils {
 
 	public static int countRotationOfCircularBinarySearch(int[] a) {
 		int low = 0;
-		int n = a.length;
+		final int n = a.length;
 		int high = n - 1;
 		while (low <= high) {
 			// case :1 a[low] < a[high] return low
@@ -97,9 +97,9 @@ public class BinarySearchUtils {
 				return low;
 			}
 			// case :2 a[mid] <= a[next] && a[mid] <= a[pre] return mid
-			int mid = low + (high - low) / 2;
-			int next = (mid + 1) % n;
-			int pre = (mid + n - 1) % n;
+			final int mid = low + (high - low) / 2;
+			final int next = (mid + 1) % n;
+			final int pre = (mid + n - 1) % n;
 
 			if (a[mid] <= a[next] && a[mid] <= a[pre]) {
 				return mid;
@@ -118,7 +118,7 @@ public class BinarySearchUtils {
 		int low = 0;
 		int high = a.length - 1;
 		while (low <= high) {
-			int mid = low + (high - low) / 2;
+			final int mid = low + (high - low) / 2;
 			// case :1 a[mid] == key found
 			if (a[mid] == key) {
 				return mid;
@@ -150,7 +150,7 @@ public class BinarySearchUtils {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param a
 	 * @param key
 	 * @param search true for first occurrence and false for last occurrence
@@ -164,7 +164,7 @@ public class BinarySearchUtils {
 			return result;
 		}
 		while (low <= high) {
-			int mid = (low + high) >>> 1;
+			final int mid = (low + high) >>> 1;
 			if (a[mid] == key) {
 				result = mid;
 				if (search) { // mean search for first occurrence
@@ -182,7 +182,7 @@ public class BinarySearchUtils {
 	}
 
 	/**
-	 * 
+	 *
 	 * Iterative implementation
 	 */
 	private static int binarySearch0(int[] a, int fromIndex, int toIndex, int key) {
@@ -192,7 +192,7 @@ public class BinarySearchUtils {
 		while (low <= high) {
 //			int mid = (low + high)/2;
 //			int mid = low +(high-low)/2; // (low +high) may overflow
-			int mid = (low + high) >>> 1;
+			final int mid = (low + high) >>> 1;
 			if (key > a[mid]) {
 				low = mid + 1;
 			} else if (key < a[mid]) {
@@ -205,7 +205,7 @@ public class BinarySearchUtils {
 	}
 
 	/**
-	 * 
+	 *
 	 * Recursive implementation
 	 */
 	private static int binarySearch1(int[] a, int fromIndex, int toIndex, int key) {
@@ -215,7 +215,7 @@ public class BinarySearchUtils {
 			return -1; // key not found.
 		}
 //	    int mid = (low + high)/2;
-		int mid = (low + high) >>> 1;
+		final int mid = (low + high) >>> 1;
 		if (key > a[mid]) {
 			low = mid + 1;
 			return binarySearch1(a, low, high, key);
@@ -244,7 +244,7 @@ public class BinarySearchUtils {
 	}
 
 	public static void main(String[] args) {
-		int[] a = new int[] { 7, 8, 9, 1, 2, 3, 4, 5, 6 };
+		final int[] a = new int[] { 7, 8, 9, 1, 2, 3, 4, 5, 6 };
 
 		System.err.println("rotation count " + countRotationOfCircularBinarySearch(a));
 		System.err.println("circular " + circularBinarySearch(a, 1));
