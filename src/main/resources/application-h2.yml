@@ -5,9 +5,12 @@ spring:
 #    name: h2
 #    driverClassName: org.h2.Driver
 #    initialization-mode: never
-#     url: jdbc:h2:mem:h2
-     url: jdbc:h2:mem:mydb;INIT=CREATE SCHEMA IF NOT EXISTS test
+#     url: jdbc:h2:mem:h2 # h2 is db name
+#     If you are using schema then use ;INIT=CREATE SCHEMA IF NOT EXISTS test or create schema.sql
+    url: jdbc:h2:mem:mydb;INIT=CREATE SCHEMA IF NOT EXISTS test
 #    url: jdbc:h2:mem:testdb  # default url
+#    username: sa # default username
+#    password:  # default password
 # h2.console.enabled=true is required to access the DB through UI
   h2:
     console:

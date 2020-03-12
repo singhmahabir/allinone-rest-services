@@ -27,74 +27,73 @@ import singh.mahabir.exception.model.ApiError;
 @ControllerAdvice
 @Slf4j
 public class ExceptionHandlerMapper {// extends ResponseEntityExceptionHandler {
-	// ****************************************************************************************************************
-	// ******************************************** Public Fields
-	// *****************************************************
-	// ****************************************************************************************************************
 
-	// ****************************************************************************************************************
-	// ****************************************** Non Public Fields
-	// ***************************************************
-	// ****************************************************************************************************************
+    @ExceptionHandler(ImageNotFoundException.class)
+    public ResponseEntity<ApiError> imageNotFoundException(ImageNotFoundException ex) {
+	final ApiError error = new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage(), ex.toString());
+	return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
 
-	@ExceptionHandler(MyException.class)
+    @ExceptionHandler(AlbumNotFoundexception.class)
+    public ResponseEntity<ApiError> albumNotFoundException(AlbumNotFoundexception ex) {
+	final ApiError error = new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage(), ex.toString());
+	return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ImageProcessingexception.class)
+    public ResponseEntity<ApiError> imageProcessingexception(ImageProcessingexception ex) {
+	final ApiError error = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex.toString());
+	return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(MyException.class)
 //	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<ApiError> exceptionToDoHandler(Exception ex) {
-		final ApiError error = new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage(), ex.toString());
-		return new ResponseEntity<>(error, HttpStatus.OK);
-	}
+    public ResponseEntity<ApiError> exceptionToDoHandler(Exception ex) {
+	final ApiError error = new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage(), ex.toString());
+	return new ResponseEntity<>(error, HttpStatus.OK);
+    }
 
-	@ExceptionHandler(Exception.class)
-	public ResponseEntity<ApiError> exceptionHandler(Exception ex) {
-		final ApiError error = new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage(), ex.toString());
-		return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
-	}
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiError> exceptionHandler(Exception ex) {
+	final ApiError error = new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage(), ex.toString());
+	return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
-	/**
-	 * Another way to send the response
-	 *
-	 * @ResponseBody is mandatory to use
-	 *
-	 * @param ex exception generated inside code
-	 * @return Default response
-	 */
-	@ExceptionHandler(javax.validation.ConstraintViolationException.class)
-	@ResponseStatus(HttpStatus.OK)
-	@ResponseBody
-	public ApiError constraintViolationException(Exception ex) {
-		log.error(" Pojo not validated {}", ex.getMessage());
-		return new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage(), ex.toString());
-	}
+    /**
+     * Another way to send the response
+     *
+     * @ResponseBody is mandatory to use
+     *
+     * @param ex exception generated inside code
+     * @return Default response
+     */
+    @ExceptionHandler(javax.validation.ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ApiError constraintViolationException(Exception ex) {
+	log.error(" Pojo not validated {}", ex.getMessage());
+	return new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage(), ex.toString());
+    }
 
-	@InitBinder
-	public void initBinder(WebDataBinder dataBinder) {
-		final StringTrimmerEditor stringtrimmer = new StringTrimmerEditor(true);
-		dataBinder.registerCustomEditor(String.class, stringtrimmer);
+    @InitBinder
+    public void initBinder(WebDataBinder dataBinder) {
+	final StringTrimmerEditor stringtrimmer = new StringTrimmerEditor(true);
+	dataBinder.registerCustomEditor(String.class, stringtrimmer);
 
-		// dataBinder.registerCustomEditor( String.class, new PropertyEditorSupport() {
-		// @Override
-		// public void setAsText(String text) {
-		// if ( text == null ) {
-		// return;
-		// }
-		// setValue( text );
-		// }
-		//
-		// @Override
-		// public String getAsText() {
-		// final Object value = getValue();
-		// return value != null ? value.trim().toString() : "";
-		// }
-		// } );
-	}
-
-	// ****************************************************************************************************************
-	// ******************************************** Public Methods
-	// ****************************************************
-	// ****************************************************************************************************************
-
-	// ****************************************************************************************************************
-	// ****************************************** Non Public Methods
-	// **************************************************
-	// ****************************************************************************************************************
+	// dataBinder.registerCustomEditor( String.class, new PropertyEditorSupport() {
+	// @Override
+	// public void setAsText(String text) {
+	// if ( text == null ) {
+	// return;
+	// }
+	// setValue( text );
+	// }
+	//
+	// @Override
+	// public String getAsText() {
+	// final Object value = getValue();
+	// return value != null ? value.trim().toString() : "";
+	// }
+	// } );
+    }
 }

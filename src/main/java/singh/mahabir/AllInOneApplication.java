@@ -22,18 +22,18 @@ import lombok.extern.slf4j.Slf4j;
 @SpringBootApplication
 @Slf4j
 public class AllInOneApplication implements ApplicationListener<ApplicationReadyEvent> {
-	public static void main(String[] args) {
-		SpringApplication.run(AllInOneApplication.class, args);
-	}
+    public static void main(String[] args) {
+	SpringApplication.run(AllInOneApplication.class, args);
+    }
 
-	/**
-	 * Handle an application event.
-	 * 
-	 * @param applicationEvent the event to respond to
-	 */
-	@Override
-	public void onApplicationEvent(ApplicationReadyEvent applicationEvent) {
-		log.info("onApplicationEvent : ApplicationReadyEvent Is Triggered");
-		log.info("Application started with command-line arguments: {}", Arrays.toString(applicationEvent.getArgs()));
-	}
+    /**
+     * Handle an application event.
+     * 
+     * @param applicationEvent the event to respond to
+     */
+    @Override
+    public void onApplicationEvent(ApplicationReadyEvent applicationEvent) {
+	log.info("onApplicationEvent : ApplicationReadyEvent Is Triggered");
+	log.info("Application started with command-line arguments: {}", Arrays.toString(applicationEvent.getArgs()));
+    }
 }

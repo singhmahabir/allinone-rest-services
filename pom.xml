@@ -71,7 +71,11 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
 		</dependency>
-
+        <!-- Rabbit Mq Dependency -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+        </dependency>
 
 		<!-- *************** 'org.springframework.cloud' dependency end *************** -->
 
@@ -84,11 +88,6 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		
-	<!-- 	<dependency>
-   			<groupId>org.springframework.boot</groupId>
-   			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency> -->
-
 		<!-- required for spring JPA -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -101,6 +100,19 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+		
+		 <!-- When using @ConfigurationProperties it is recommended to add
+         'spring-boot-configuration-processor' to your classpath to generate
+          configuration metadata But It worked without it as well -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+      <!--   <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency> -->
 
 		<!-- this is required to make application auto re-deploy when project changes -->
 		<dependency>
@@ -136,13 +148,13 @@
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
-			<version>2.2.2</version>
+			<version>2.6.1</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
-			<version>2.2.2</version>
+			<version>2.6.1</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -153,10 +165,11 @@
 			<scope>runtime</scope>
 		</dependency>
 			<!-- when you want to make your application as client of spring admin Service -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>de.codecentric</groupId>
 			<artifactId>spring-boot-admin-starter-client</artifactId>
-		</dependency>
+		</dependency> -->
+	
 	</dependencies>
 
 	<dependencyManagement>

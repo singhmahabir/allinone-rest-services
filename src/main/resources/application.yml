@@ -9,8 +9,9 @@ spring:
     active:
       - default
       - h2
-      - admin
+#      - admin
       - actuator
+      - security
   main:
     banner-mode: "off"
 # info property details shows in actuators info url http://localhost:8082/actuator/info
@@ -42,8 +43,4 @@ listOfValues:
   A
   B
   C
-input:
-  mapofvalues: 
-    a: a
-    b: b
-    c: c
+mapofvalues: {a: a , b: b , c: c }
